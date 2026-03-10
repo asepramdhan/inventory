@@ -10,7 +10,8 @@
     },
     "helpers": {
         "popup": [
-            "select"
+            "select",
+            "popover"
         ]
     },
     "internalDependencies": {

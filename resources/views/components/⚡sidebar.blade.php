@@ -1,11 +1,18 @@
 <?php
 
 use Livewire\Component;
+use Livewire\Attributes\On; 
 use App\Models\User;
 
 new class extends Component
 {
     public $usersCount = 0;
+
+    #[On('refreshUserCount')]
+    public function refreshUserCount()
+    {
+        $this->usersCount = User::count();
+    }
 
     public function mount()
     {
@@ -32,8 +39,9 @@ new class extends Component
 
         <x-ui.navlist>
             <x-ui.navlist.group label="Main" class="dark:text-zinc-500 uppercase text-[10px] tracking-widest font-bold">
-                <x-ui.navlist.item label="Dashboard" icon="home" href="/dashboard" :active="request()->is('dashboard')"
-                    wire:navigate class="dark:hover:bg-zinc-900 dark:text-zinc-300 dark:active:text-white" />
+                <x-ui.navlist.item label="Dashboard" icon="home" href="/dashboard"
+                    :active="request()->routeIs('dashboard.index')" wire:navigate
+                    class="dark:hover:bg-zinc-500 dark:text-zinc-300 dark:active:text-white" />
                 <x-ui.navlist.item label="Analytics" icon="chart-bar" href="/analytics"
                     class="dark:hover:bg-zinc-900 dark:text-zinc-300" />
             </x-ui.navlist.group>
@@ -41,8 +49,12 @@ new class extends Component
             <x-ui.navlist.group label="Management" collapsable
                 class="dark:text-zinc-500 uppercase text-[10px] tracking-widest font-bold">
                 <x-ui.navlist.item label="Users" icon="users" href="/users" badge="{{ $this->usersCount }}"
-                    :active="request()->is('users*')" wire:navigate class="dark:hover:bg-zinc-900 dark:text-zinc-300" />
-                <x-ui.navlist.item label="Products" icon="cube" href="/products"
+                    :active="request()->routeIs('users*')" wire:navigate
+                    class="dark:hover:bg-zinc-900 dark:text-zinc-300" />
+                <x-ui.navlist.item label="Products" icon="cube" href="{{ route('products.index') }}" wire:navigate
+                    :active="request()->routeIs('products*')" class="dark:hover:bg-zinc-900 dark:text-zinc-300" />
+                <x-ui.navlist.item label="Stores" icon="building-storefront" href="{{ route('stores.index') }}"
+                    wire:navigate :active="request()->routeIs('stores*')"
                     class="dark:hover:bg-zinc-900 dark:text-zinc-300" />
             </x-ui.navlist.group>
         </x-ui.navlist>
@@ -68,7 +80,7 @@ new class extends Component
                 </x-slot:button>
 
                 <x-slot:menu class="w-56! dark:bg-zinc-900 dark:border-zinc-800 shadow-2xl">
-                    <x-ui.dropdown.item href="#" icon="adjustments-horizontal"
+                    <x-ui.dropdown.item href="{{ route('settings.index') }}" wire:navigate icon="adjustments-horizontal"
                         class="dark:text-zinc-300 dark:hover:bg-zinc-800">
                         Preference
                     </x-ui.dropdown.item>

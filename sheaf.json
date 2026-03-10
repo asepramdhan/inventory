@@ -56,7 +56,7 @@
             "installationTime": 1772911602
         },
         "popup": {
-            "installationTime": 1772911602
+            "installationTime": 1773072763
         },
         "text": {
             "installationTime": 1772911605
@@ -72,6 +72,15 @@
         },
         "separator": {
             "installationTime": 1772987803
+        },
+        "textarea": {
+            "installationTime": 1773066646
+        },
+        "popover": {
+            "installationTime": 1773072763
+        },
+        "heading": {
+            "installationTime": 1773072926
         }
     }
 }

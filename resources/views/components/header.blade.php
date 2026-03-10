@@ -43,7 +43,7 @@
 
         <x-ui.dropdown.separator />
 
-        <x-ui.dropdown.item href="#" wire:navigate.live>
+        <x-ui.dropdown.item href="{{ route('settings.index') }}" wire:navigate>
           Account
         </x-ui.dropdown.item>
 
